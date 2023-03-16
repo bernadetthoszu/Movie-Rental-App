@@ -24,3 +24,22 @@ I had to exercise feature-driven development for the realisation of this project
 6. Implement persistent storage for all entities using file-based repositories. This implies implementing two additional repository sets: one using text files for storage, and one using binary files (e.g. using object serialization with [Pickle](https://docs.python.org/3.8/library/pickle.html)). The program must work the same way using in-memory repositories, text-file repositories and binary file repositories.
 7. Implement a `settings.properties` file to configure your application. The decision of which repositories are employed, as well as the location of the repository input files will be made in the program’s `settings.properties` file.
 8. Create a Python module that contains an iterable data structure*, a sort method and a filter method, together with complete PyUnit unit tests (100% coverage). The module must be reusable in other projects. Update your previous code to use the data structure (for storing objects in the repository) and both functions (in the repository or service layer) from this module. *Study the [`__setItem__`](https://docs.python.org/3/reference/datamodel.html#object),`__getitem__`, `__delItem__`, `__next__` and `__iter__` Python methods.
+
+## Some pics of the GUI
+![main window](https://github.com/bernadetthoszu/Movie-Rental-App/blob/main/main_window.png)
+
+![add movie window](https://github.com/bernadetthoszu/Movie-Rental-App/blob/main/add_movie.png)
+
+![list movies window after add](https://github.com/bernadetthoszu/Movie-Rental-App/blob/main/list_movies.png)
+
+![update movie window](https://github.com/bernadetthoszu/Movie-Rental-App/blob/main/update_movie.png)
+
+![list movies window after update](https://github.com/bernadetthoszu/Movie-Rental-App/blob/main/list_movies_after_update.png)
+
+![rent movie window](https://github.com/bernadetthoszu/Movie-Rental-App/blob/main/rent_movie.png)
+
+![list rentals window](https://github.com/bernadetthoszu/Movie-Rental-App/blob/main/list_rentals.png)
+
+![return movie window](https://github.com/bernadetthoszu/Movie-Rental-App/blob/main/search_movie.png)
+
+![search movie results window](https://github.com/bernadetthoszu/Movie-Rental-App/blob/main/search_movie_results.png)
