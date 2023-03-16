@@ -261,18 +261,6 @@ class MovieRental_GUI:
         self.__secondary_window.destroy()
 
     def __update_movie_pressed(self):
-        # print('What movie do you want to update? (give id)')
-        # movie_id = input('>>>')
-        # print('What do you want to update? (description or genre)')
-        # attribute = input('>>>')
-        # print('Give new attribute')
-        # new_value = input('>>>')
-        # try:
-        #     self.__serviceMovie.update_movie(movie_id, attribute, new_value)
-        # except RepositoryError as re:
-        #     print(str(re))
-        # except ValidationError as ve:
-        #     print(str(ve))
         self.__secondary_window = Tk()
         self.__secondary_window.title("Update movie")
 
@@ -532,7 +520,6 @@ class MovieRental_GUI:
         self.__secondary_window.destroy()
 
     def __return_movie_pressed(self):
-
         self.__secondary_window = Tk()
         self.__secondary_window.title("Return movie")
 
@@ -543,7 +530,7 @@ class MovieRental_GUI:
         lbl.grid(row=0, column=0)
         self.__client_id = ttk.Entry(client_frame, {})
         self.__client_id.grid(row=0, column=1)
-        self.__client_id.bind("<Tab>", self.__handle_rentals_of_client)
+        self.__client_id.bind("<Return>", self.__handle_rentals_of_client)
 
         self.__secondary_window.mainloop()
 

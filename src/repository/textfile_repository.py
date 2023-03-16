@@ -2,9 +2,6 @@ import datetime
 from src.repository.repositories import RepoMovie, RepoClient, RepoRental
 from src.domain.entities import Movie, Client, Rental
 
-#TODO Ask whether methods that do not change the repositories need to be overwritten...
-#Normally, I would say no, because the two repositories (file & temporary) work in parallel during the run of a program
-#...meaning that they have the same contents at any given moment between two commands
 
 class TextFileRepoMovie(RepoMovie):
 
@@ -57,7 +54,6 @@ class TextFileRepoMovie(RepoMovie):
         2. Save the ingredients to file
         """
         super(TextFileRepoMovie, self).add_movie(movie)
-        # super().add_movie(movie)
         self._update_file(movie)
 
     def remove_movie(self, movie_id):

@@ -115,7 +115,6 @@ class TestRentalService(unittest.TestCase, SrvRental):
     def test_late_rentals(self):
         self.testSrv.rent_movie('1', '1', '2', '2021-11-14', '2121-12-14')
         self.testSrv.rent_movie('2', '4', '2', '2021-11-14', '2021-11-24')
-        # self.assertEqual(self.testSrv.late_rentals(), [Rental('2', '4', '2', '2021-11-14', '2021-11-24', (datetime.date.min).isoformat())])
         self.assertEqual(self.testSrv.late_rentals(), [Rental('2', '4', '2', datetime.date.fromisoformat('2021-11-14'), datetime.date.fromisoformat('2021-11-24'), datetime.date.min)])
         another_repo_client = RepoClient()
         another_repo_movies = RepoMovie()
@@ -125,17 +124,6 @@ class TestRentalService(unittest.TestCase, SrvRental):
         another_service = SrvRental(another_repo_client, another_repo_movies, another_repo_rental, another_valid_rental, another_srvUndoRedo)
         self.assertRaisesRegex(Exception, 'No rentals!', another_service.late_rentals)
 
-    # def test_remove_rental(self):
-    #     self.testSrv.rent_movie('1', '1', '2', '2021-11-14', '2021-12-14')
-    #     self.testSrv.rent_movie('2', '4', '2', '2021-11-14', '2021-11-24')
-    #     self.testSrv._remove_rental('2')
-    #     self.assertEqual(len(self.testSrv.get_all_rentals()), 2)
-    #     self.testSrv._remove_rental('1')
-    #     self.assertEqual(len(self.testSrv.get_all_rentals()), 1)
-
-    # def test_reverse_return(self):
-    #     self.testSrv._reverse_return('4')
-    #     self.assertEqual(self.testSrv.search_rental_by_id('4').get_returned_date(), datetime.date.min)
 
 class TestRentalValidator(unittest.TestCase):
 
@@ -161,7 +149,7 @@ class TestRentalRepository(unittest.TestCase):
 
         #In testRepoMovie we have : 2 movies
         #In testRepoClient we have : 2 clients
-        #In testRepoRental we have : 2 rentals.txt, 1 for each client
+        #In testRepoRental we have : 2 rentals, 1 for each client
         movie = Movie('1', 'Pretty Woman', 'Starring Richard Gere and Julia Roberts.', 'Romance')
         movie2 = Movie('2', 'Crime Busters', 'With Terence Hill and Bud Spencer.', 'Comedy')
         client = Client('1', 'Lucy')

@@ -68,10 +68,6 @@ class SrvMovie :
         cope = Operation(undo_call, redo_call)
         self.__serviceUndoRedo.record(cope)
 
-    # def movies_starting_with_a(self):
-    #     movies = self.__repositoryMovie.get_all_movies()
-    #     return [x for x in movies if x.get_title()[0] == 'a']
-
     def search_movie_by_id(self, movie_id):
         """"
         params: movie ID
@@ -255,32 +251,6 @@ class SrvRental :
         return item[1]
 
     def most_rented_movies(self):
-        # movies = self.__repositoryMovie.get_all_movies()
-        # nr_of_movies = len(movies)
-        # rentals = self.__repositoryRental.get_all_rentals()
-        # if len(rentals) == 0:
-        #     raise Exception('No rentals!')
-        # # total_nr_of_days_per_movie = [0, 0]*3 makes deep copy of the list [0, 0] !!!
-        #
-        # total_nr_of_days_per_movie = [[0, 0] for i in range(0, len(movies))]
-        # i=0
-        # while i < nr_of_movies:
-        #     total_nr_of_days_per_movie[i][0] = i
-        #     i += 1
-        # i=0
-        # for rental_id in rentals:
-        #     rental = self.search_rental_by_id(rental_id)
-        #     movie = self.__repositoryMovie.search_movie_by_id(rental.get_movie_id())
-        #     total_nr_of_days_per_movie[i][1] += self.__repositoryRental.get_rented_days(rental_id).days
-        #     i+=1
-        #
-        # total_nr_of_days_per_movie.sort(reverse=True, key=self.sort_key)
-        #
-        # movies_statistics = []
-        # for l in total_nr_of_days_per_movie:
-        #     movies_statistics.append(self.__repositoryMovie.search_movie_by_id(movies[l[0]].get_movie_id()))
-        # return movies_statistics
-
         if len(self.__repositoryRental) == 0:
             raise Exception('No rentals!')
         movies_stats = IterableDictionary()    #key = movie_id, value = total nr of days
@@ -295,7 +265,6 @@ class SrvRental :
         movies_sorted = Sort.shellSort(lambda x, y: x >= y, movies_stats)
         result = []
         for movie_id in movies_sorted:
-            # movie = self.__repositoryMovie.search_movie_by_id(movie_id)
             movie = self.__repositoryMovie.search_movie_by_id(movie_id)
             result.append(movie)
         return result
@@ -303,31 +272,6 @@ class SrvRental :
 
 
     def most_active_clients(self):
-        # clients = self.__repositoryClient.get_all_clients()
-        # nr_of_clients = len(clients)
-        # rentals = self.__repositoryRental.get_all_rentals()
-        # if len(rentals) == 0:
-        #     raise Exception('No rentals!')
-        #
-        # total_nr_of_days_per_client = [[0, 0] for i in range(0, len(clients))]
-        # i = 0
-        # while i < nr_of_clients:
-        #     total_nr_of_days_per_client[i][0] = i
-        #     i += 1
-        # i=0
-        # for client_id in clients:
-        #     client_rentals = self.get_rentals_of_client(client_id)
-        #     for rental in client_rentals:
-        #         total_nr_of_days_per_client[i][1] += self.__repositoryRental.get_rented_days(client_id).days
-        #     i+=1
-        #
-        # total_nr_of_days_per_client.sort(reverse=True, key=self.sort_key)
-        #
-        # clients_statistics = []
-        # for l in total_nr_of_days_per_client:
-        #     clients_statistics.append(self.__repositoryClient.search_client_by_id(clients[l[0]].get_client_id()))
-        # return clients_statistics
-
         if len(self.__repositoryRental) == 0:
             raise Exception('No rentals!')
         clients_stats = IterableDictionary()  # key = client_id, value = total nr of days
@@ -342,7 +286,6 @@ class SrvRental :
         clients_sorted = Sort.shellSort(lambda x, y: x >= y, clients_stats)
         result = []
         for client_id in clients_sorted:
-            # client = self.__repositoryClient.search_client_by_id(client_id)
             client = self.__repositoryClient.search_client_by_id(client_id)
             result.append(client)
         return result
@@ -355,32 +298,13 @@ class SrvRental :
         late_rentals = Filter.filter(lambda x: x.get_return_delay() > 0, all_rentals)
         sorted_late_rentals = Sort.shellSort(lambda x, y: x.get_return_delay() >= y.get_return_delay(), late_rentals)
 
-        # total_nr_of_days_per_rental = []
-        # for rental_id in rentals:
-        #     delay = self.__repositoryRental.get_return_delay(rental_id).days
-        #     if delay > 0:
-        #         total_nr_of_days_per_rental.append([rental_id, delay])
-        #
-        # total_nr_of_days_per_rental.sort(reverse=True, key=self.sort_key)
-        # nr_of_late_rentals = len(total_nr_of_days_per_rental)
-
         result = []
-        # for l in total_nr_of_days_per_rental:
-        #     #[id_rental, movie, delay]
-        #     #id_rental - string, movie - Movie, delay - int
-        #     stats.append([l[0], self.__repositoryMovie.search_movie_by_id(self.__repositoryRental.search_rental_by_id(l[0]).get_movie_id()), l[1]])
-        # return stats
 
         for rental_id in sorted_late_rentals:
             rental = sorted_late_rentals[rental_id]
             result.append(rental)
         return result
 
-    # def _remove_rental(self, rental_id):
-    #     self.__repositoryRental._remove_rental(rental_id)
-    #
-    # def _reverse_return(self, rental_id):
-    #     self.__repositoryRental._reverse_return(rental_id)
 
 #class SrvUndoRedo(SrvRental):
 class SrvUndoRedo:

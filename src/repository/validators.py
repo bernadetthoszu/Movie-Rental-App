@@ -91,29 +91,11 @@ class ValidRental(ValidMovie, ValidClient) :
          except ValueError:
              errors += 'Invalid rented date! '
 
-         #Python String find() method returns the lowest index of the substring if it is found in a given string. If it is not found then it returns -1.
          if errors.find('Invalid due date!') >= 0 or errors.find('Invalid rented date!') >= 0:
              raise ValidationError(errors)
 
          if due_date < rented_date:
              errors += 'Invalid dates! - Due date is before rented date'
-
-         # if not year.isdigit():
-         #     errors += 'Invalid year! '
-         # if not month in ['01', '1', '02', '2', '03', '3', '04', '4', '05', '5', '06', '6', '07', '7', '08', '8', '09', '9', '10', '11', '12', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']:
-         #     errors += 'Invalid month! '
-         # if not day.isdigit():
-         #     errors += 'Invalid day! '
-         # elif int(day) == 0 or int(day) > 31:
-         #     errors += 'Invalid day! '
-         # elif month in ['02', '2', 'February', 'february'] and int(day) == 0 or int(day)>29:
-         #     errors += 'Invalid day! '
-         # elif month in ['02', '2', 'February', 'february'] and not ((int(year)%100 != 0 and int(year)%4 == 0) or (int(year)%400 == 0)) and day == '29':
-         #     #To be a leap year, the year number must be divisible by four – except for end-of-century years, which must be divisible by 400. This means that the year 2000 was a leap year, although 1900 was not.
-         #     #Only in leap years does February 29th exist...
-         #     errors += 'Invalid day! '
-         # elif month in ['02', '2', 'February', 'february', '04', '4', 'April', 'april', '06', '6', 'June', 'june', '09', '9', 'September', 'september', '11', 'November', 'november'] and day == '31':
-         #     errors += 'Invalid day! '
 
          if len(errors) > 0 :
              raise ValidationError(errors)

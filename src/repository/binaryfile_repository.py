@@ -12,9 +12,6 @@ class BinaryFileRepoMovie(RepoMovie):
         self._movies.clear()
         with open(self._file_name, "rb") as f:
             try:
-                # while True:
-                #     m = pickle.load(f)
-                #     self._movies.add(m.get_movie_id(), m)
                 self._movies = pickle.load(f)
             except EOFError:
                 pass
@@ -30,7 +27,6 @@ class BinaryFileRepoMovie(RepoMovie):
         2. Save the ingredients to file
         """
         super(BinaryFileRepoMovie, self).add_movie(movie)
-        # super().add_movie(movie)
         self._save_file()
 
     def remove_movie(self, movie_id):
@@ -67,21 +63,13 @@ class BinaryFileRepoClient(RepoClient):
         self._clients.clear()
         with open(self._file_name, "rb") as f:
             try:
-                # while True:
-                #     c = pickle.load(f)
-                #     self._clients.add(c.get_client_id(), c)
                 self._clients = pickle.load(f)
-
             except EOFError:
                 pass
 
     def _save_file(self):
         with open(self._file_name, "wb") as f:
             pickle.dump(self._clients, f)
-
-    # def _update_file(self, client):
-    #     with open(self._file_name, "ab") as f:
-    #         pickle.dump(client, f)
 
     def add_client(self, client):
         super().add_client(client)
@@ -122,9 +110,6 @@ class BinaryFileRepoRental(RepoRental):
         self._rentals.clear()
         with open(self._file_name, "rb") as f:
             try:
-                # while True:
-                    # r = pickle.load(f)
-                    # self._rentals.add(r.get_rental_id(), r)
                 self._rentals = pickle.load(f)
             except EOFError:
                 pass
@@ -162,12 +147,6 @@ class BinaryFileRepoRental(RepoRental):
 
     def get_all_rentals(self):
         return super(BinaryFileRepoRental, self).get_all_rentals()
-
-    # def get_rented_days(self, rental_id):
-    #     return super(BinaryFileRepoRental, self).get_rented_days(rental_id)
-    #
-    # def get_return_delay(self, rental_id):
-    #     return super(BinaryFileRepoRental, self).get_return_delay(rental_id)
 
     def __len__(self):
         return len(self._rentals)

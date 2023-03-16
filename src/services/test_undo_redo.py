@@ -15,12 +15,9 @@ class TestUndoRedoService(unittest.TestCase, SrvUndoRedo):
         self.repoMovies = RepoMovie()
         self.repoRental = RepoRental(self.repoClient, self.repoMovies)
         self.srvClient = SrvClient(self.repoClient, self.validClient, self.testSrv)
-        #self.srvClient.add_client('1', 'Lucy')
         self.srvMovies = SrvMovie(self.repoMovies, self.validMovie, self.testSrv)
-        #self.srvMovies.add_movie('1', 'Pretty Woman', '1990', 'Romance')
         self.srvRental = SrvRental(self.repoClient, self.repoMovies, self.repoRental, self.validRental, self.testSrv)
         self.srvRemove = SrvRemove(self.testSrv, self.repoMovies, self.repoClient, self.repoRental)
-        #self.srvRental.rent_movie('1', '1', '1', '2021-11-14', '2121-11-20')
 
     def tearDown(self) -> None:
         unittest.TestCase.tearDown(self)

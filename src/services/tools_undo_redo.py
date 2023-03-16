@@ -8,8 +8,6 @@ class Call:
         self._function_params = function_params #list (packed them)
 
     def call(self):
-        # print(*self._function_params)
-        # print(self._function_name)
         self._function_name(*self._function_params)
 
 class Operation:
